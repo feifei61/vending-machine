@@ -15,6 +15,7 @@ public class LoginWindow implements Window{
         scene = new Scene(pane, width, height);
 
         //declare shapes here
+        
     }
 
     public Scene getScene() { return scene; }
