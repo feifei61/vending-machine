@@ -10,14 +10,20 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
     private LoginWindow loginWindow;
-    private Scene scene;
+    private Stage stage;
 
     @Override
     public void start(Stage stage) throws IOException {
+        this.stage = stage;
         loginWindow = new LoginWindow();
 
         stage.setTitle("Lite Snacks");
         stage.setScene(loginWindow.getScene());
+        stage.show();
+    }
+
+    public void setScene(Scene scene) {
+        stage.setScene(scene);
         stage.show();
     }
 
