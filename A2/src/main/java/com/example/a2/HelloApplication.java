@@ -1,7 +1,6 @@
 package com.example.a2;
 
 import com.example.a2.view.LoginWindow;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

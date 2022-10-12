@@ -5,9 +5,9 @@ public class User{
     private String username;
     private String password;
 
-    public User(String username, String username){
-        username = username;
-        password = password;
+    public User(String username, String password){
+        this.username = username;
+        this.password = password;
     }
 
     public void setRole(Role role){
