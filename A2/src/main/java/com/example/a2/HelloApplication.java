@@ -18,10 +18,9 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         this.stage = stage;
         loginWindow = new LoginWindow();
-        homeWindow = new HomeWindow();
 
         stage.setTitle("Lite Snacks");
-        stage.setScene(homeWindow.getScene());
+        stage.setScene(loginWindow.getScene());
         stage.show();
     }
 
