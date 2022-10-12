@@ -1,6 +1,8 @@
 package com.example.a2;
 
 import com.example.a2.view.LoginWindow;
+import com.example.a2.view.HomeWindow;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -9,6 +11,7 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
     private LoginWindow loginWindow;
+    private HomeWindow homeWindow;
     private Stage stage;
 
     @Override
