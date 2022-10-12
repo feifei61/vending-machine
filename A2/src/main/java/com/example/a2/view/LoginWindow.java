@@ -10,7 +10,7 @@ public class LoginWindow implements Window{
     private Pane pane;
     private Scene scene;
     private TextField captureUsername;
-    private TextField capturePassword;
+    private PasswordField capturePassword;
     private int width = 400;
     private int height = 300;
 
@@ -19,13 +19,13 @@ public class LoginWindow implements Window{
         scene = new Scene(pane, width, height);
 
         //declare shapes here
-        captureUsername = new TextField("Username");
+        captureUsername = new TextField();
         pane.getChildren().add(captureUsername);
 
-        captureUsername.setLayoutY(125);
+        captureUsername.setLayoutY(100);
         captureUsername.setLayoutX(130);
 
-        capturePassword = new TextField("Password");
+        capturePassword = new PasswordField();
         pane.getChildren().add(capturePassword);
 
         capturePassword.setLayoutY(150);
@@ -36,12 +36,14 @@ public class LoginWindow implements Window{
             public void handle(ActionEvent e)
             {
                 // TODO username and password need to be given to the System
+                System.out.println(captureUsername.getText());
+                System.out.println(capturePassword.getText());
             }
         };
 
-        // when enter is pressed
+        // press enter in either text box
         captureUsername.setOnAction(event);
-
+        capturePassword.setOnAction(event);
     }
 
     public Scene getScene() { return scene; }
