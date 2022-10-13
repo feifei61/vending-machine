@@ -16,8 +16,10 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        System system = new System(); //use this for logic
+
         this.stage = stage;
-        loginWindow = new LoginWindow();
+        loginWindow = new LoginWindow(system);
 
         stage.setTitle("Lite Snacks");
         stage.setScene(loginWindow.getScene());
@@ -30,7 +32,6 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-        System system = new System(); //use this for logic
         launch();
     }
 }
