@@ -2,6 +2,7 @@ package com.example.a2;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.lang.System;
 
 public class DBManage {
 
@@ -14,12 +15,25 @@ public class DBManage {
             connection = DriverManager.getConnection(url);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
+            // user table
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS Users " +
-                    "(username TEXT, password TEXT, userID INT PRIMARY KEY, role TEXT)");
+                    "(username TEXT, " +
+                    "password TEXT, " +
+                    "userID INTEGER PRIMARY KEY NOT NULL, " +
+                    "role TEXT)");
+            // products Table
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS Products " +
-                    "(cost FLOAT, name TEXT, prodID int PRIMARY KEY, Category TEXT)");
-            statement.executeUpdate("CREATE TABLE IF NOT EXISTS Purchased " +
-                    "(userID REFERENCES Users(userID), prodID REFERENCES Products(prodID))");
+                    "(cost FLOAT, " +
+                    "name TEXT, " +
+                    "prodID INTEGER PRIMARY KEY NOT NULL, " +
+                    "Category TEXT)");
+            // transactions Table
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS Transactions " +
+                    "(transID INTEGER PRIMARY KEY NOT NULL, " +
+                    "userID REFERENCES Users(userID) NOT NULL, " +
+                    "prodID REFERENCES Products(prodID) NOT NULL," +
+                    "success BIT NOT NULL," +
+                    "date TIMESTAMP)");
             java.lang.System.out.println("------------DB created------------");
         } catch (Exception e) {
             java.lang.System.out.println("_________________________ERROR at createDB_________________________");
@@ -37,19 +51,18 @@ public class DBManage {
     }
 
     // add user to database
-    public static void addUser(String userName, String password, int userID, String role){
+    public static void addUser(String userName, String password, String role){
         try {
             connection = DriverManager.getConnection(url);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
 
-            String insertStatement = "INSERT INTO Users (username, password, userID, role) VALUES(?,?,?,?)";
+            String insertStatement = "INSERT INTO Users (username, password, role) VALUES(?,?,?)";
             PreparedStatement preparedStatement =
                     connection.prepareStatement(insertStatement);
             preparedStatement.setString(1, userName);
             preparedStatement.setString(2, password);
-            preparedStatement.setInt(3, userID);
-            preparedStatement.setString(4,role);
+            preparedStatement.setString(3,role);
             preparedStatement.executeUpdate();
 
         } catch (Exception e) {
@@ -96,19 +109,18 @@ public class DBManage {
     }
 
     // add product to database
-    public static void addProduct(double cost, String name, int prodID, String category){
+    public static void addProduct(double cost, String name, String category){
         try {
             connection = DriverManager.getConnection(url);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
 
-            String insertStatement = "INSERT INTO Products (Cost, Name, ProdID, Category) VALUES(?,?,?,?)";
+            String insertStatement = "INSERT INTO Products (Cost, Name,  Category) VALUES(?,?,?)";
             PreparedStatement preparedStatement =
                     connection.prepareStatement(insertStatement);
             preparedStatement.setDouble(1, cost);
             preparedStatement.setString(2, name);
-            preparedStatement.setInt(3, prodID);
-            preparedStatement.setString(4, category);
+            preparedStatement.setString(3, category);
             preparedStatement.executeUpdate();
 
         } catch (Exception e) {
@@ -154,22 +166,33 @@ public class DBManage {
         }
     }
 
-    // add purchased history
-    public static void addPurchased(int userID, int prodID){
+    // add purchase history (the time of transaction will be recorded when this function is called)
+    public static void addTransaction(int userID, int prodID, boolean success){
         try {
             connection = DriverManager.getConnection(url);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
 
-            String insertStatement = "INSERT INTO Purchased (userID, prodID) VALUES(?,?)";
+            int successBit;
+            if (success){
+                successBit = 1;
+            } else {
+                successBit = 0;
+            }
+
+            Timestamp timestamp = new Timestamp(java.lang.System.currentTimeMillis());
+
+            String insertStatement = "INSERT INTO Transactions (userID, prodID, success, date) VALUES(?,?,?,?)";
             PreparedStatement preparedStatement =
                     connection.prepareStatement(insertStatement);
             preparedStatement.setInt(1, userID);
             preparedStatement.setInt(2, prodID);
+            preparedStatement.setInt(3, successBit);
+            preparedStatement.setTimestamp(4, timestamp);
             preparedStatement.executeUpdate();
 
         } catch (Exception e) {
-            java.lang.System.out.println("_________________________ERROR at addPurchased_________________________");
+            java.lang.System.out.println("_________________________ERROR at addTransaction_________________________");
             java.lang.System.err.println(e.getMessage());
         } finally {
             try {
