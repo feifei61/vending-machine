@@ -26,7 +26,12 @@ public class DBManage {
                     "(cost FLOAT, " +
                     "name TEXT, " +
                     "prodID INTEGER PRIMARY KEY NOT NULL, " +
+                    "quantity INTEGER DEFAULT (7), " +
                     "Category TEXT)");
+            // currency Table
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS Currencies " +
+                    "(amount FLOAT, " +
+                    "quantity INTEGER DEFAULT (5))");
             // transactions Table
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS Transactions " +
                     "(transID INTEGER PRIMARY KEY NOT NULL, " +
@@ -243,21 +248,32 @@ public class DBManage {
         }
     }
 
-    // get name of all products currently in db
-    public static ArrayList<String> getProducts(){
-        ArrayList<String> products = new ArrayList<>();
+    // get all products currently in db
+    public static ArrayList<Product> getProducts(){
+        ArrayList<Product> products = new ArrayList<>();
 
         try {
             connection = DriverManager.getConnection(url);
 
             // make sure the order is same using "order by"
-            String insertStatement = "SELECT name FROM products";
+            String insertStatement = "SELECT * FROM products";
             PreparedStatement preparedStatement =
                     connection.prepareStatement(insertStatement);
             ResultSet productList = preparedStatement.executeQuery();
 
             while (productList.next()) {
-                products.add(productList.getString("name"));
+                int prodID = productList.getInt("prodID");
+                String prodName = productList.getString("name");
+                double cost = productList.getFloat("cost");
+                int qty = productList.getInt("quantity");
+
+                // TODO: finish all category cases here
+                switch (productList.getString("Category")) {
+                    case "Drinks":
+                        products.add(new Drinks(prodID, prodName, cost, qty));
+                    default:
+                        System.out.println("product category invalid");
+                }
             }
         } catch (Exception e) {
             java.lang.System.out.println("_________________________ERROR at getProducts_________________________");

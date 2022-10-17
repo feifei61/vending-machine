@@ -16,10 +16,8 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        System system = new System(); //use this for logic
-
         this.stage = stage;
-        loginWindow = new LoginWindow();
+        loginWindow = new LoginWindow(this);
         homeWindow = new HomeWindow();
 
         stage.setTitle("Lite Snacks");
@@ -32,13 +30,22 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
-        System system = new System(); //use this for logic
-        DBManage.createDB();
-        DBManage.addUser("admin", "admin", "Owner");
-        DBManage.addProduct(10.4, "apple", "fruit");
-        DBManage.addTransaction(1,1, true);
-        launch();
+    public HomeWindow getHomeWindow() {
+        return this.homeWindow;
+    }
 
+    public LoginWindow getLoginWindow() {
+        return this.loginWindow;
+    }
+
+    public static void main(String[] args) {
+        DBManage.createDB();
+        // DBManage.addUser("admin", "admin", "Owner");
+        // DBManage.addProduct(10.4, "cola", "Drinks");
+        // DBManage.addTransaction(1,1, true);
+
+        System system = new System(); //use this for logic
+        java.lang.System.out.println(system.getVendingMachine().getProductInventroy());
+        launch();
     }
 }
