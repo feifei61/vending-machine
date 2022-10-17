@@ -13,17 +13,4 @@ public class User{
     public void setRole(Role role){
         this.role = role;
     }
-
-    // ---------------------------
-    // -------- Purchase ---------
-    // ---------------------------
-    
-    // Select by product code
-    public void selectItem(int code) {
-        
-    }
-
-    public void selectItemQty() {
-
-    }
 }
