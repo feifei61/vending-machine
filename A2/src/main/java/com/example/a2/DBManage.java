@@ -65,7 +65,6 @@ public class DBManage {
             ResultSet result = preparedStatement.executeQuery();
 
             if(result.isClosed()){
-                System.out.println("User not found");
                 return null;
             }
 
