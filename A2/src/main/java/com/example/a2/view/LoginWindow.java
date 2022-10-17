@@ -2,6 +2,8 @@ package com.example.a2.view;
 import com.example.a2.User;
 
 import com.example.a2.DBManage;
+import com.example.a2.HelloApplication;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.*;
@@ -9,7 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.text.Text;
 
-public class LoginWindow implements Window{
+public class LoginWindow implements Window {
     private Pane pane;
     private Scene scene;
     private Text text;
@@ -19,8 +21,9 @@ public class LoginWindow implements Window{
     private PasswordField capturePassword;
     private int width = 400;
     private int height = 300;
+    private HelloApplication app;
 
-    public LoginWindow() {
+    public LoginWindow(HelloApplication app) {
         pane = new Pane();
         scene = new Scene(pane, width, height);
         text = new Text();
@@ -66,6 +69,7 @@ public class LoginWindow implements Window{
                 if(result != null){
                     if(password.equals(result)){
                         text.setText("User matched");
+                        app.setScene(app.getHomeWindow().getScene());
                     }
                     else{
                         text.setText("Wrong password");
