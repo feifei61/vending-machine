@@ -1,6 +1,6 @@
 package com.example.a2;
 
 public interface Role{
-    public void modify(System system);
-    public void getReport(System system);
+    public void modify(Sys system);
+    public void getReport(Sys system);
 }

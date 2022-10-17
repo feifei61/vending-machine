@@ -1,4 +1,4 @@
-package com.example.a2;
+package com.example.a2.products;
 
 public class Drinks extends Product {
     
