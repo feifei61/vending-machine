@@ -19,7 +19,7 @@ public class HelloApplication extends Application {
         System system = new System(); //use this for logic
 
         this.stage = stage;
-        loginWindow = new LoginWindow(system);
+        loginWindow = new LoginWindow();
 
         stage.setTitle("Lite Snacks");
         stage.setScene(loginWindow.getScene());
@@ -32,6 +32,12 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
+        System system = new System(); //use this for logic
+        DBManage.createDB();
+        DBManage.addUser("admin", "admin", "Owner");
+        DBManage.addProduct(10.4, "apple", "fruit");
+        DBManage.addTransaction(1,1, true);
         launch();
+
     }
 }

@@ -1,7 +1,7 @@
 package com.example.a2.view;
 import com.example.a2.User;
-import com.example.a2.System;
 
+import com.example.a2.DBManage;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.*;
@@ -9,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 public class LoginWindow implements Window{
-    private System system;
     private Pane pane;
     private Scene scene;
     private TextField captureUsername;
@@ -17,8 +16,7 @@ public class LoginWindow implements Window{
     private int width = 400;
     private int height = 300;
 
-    public LoginWindow(System system) {
-        this.system = system;
+    public LoginWindow() {
         pane = new Pane();
         scene = new Scene(pane, width, height);
 
@@ -39,9 +37,24 @@ public class LoginWindow implements Window{
         EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e)
             {
-                // TODO username and password need to be given to the System
-                User newUser = new User(captureUsername.getText(), capturePassword.getText());
-                system.addUser(newUser);
+                String username = captureUsername.getText();
+                String password = capturePassword.getText();
+
+                String result = DBManage.getUser(username);
+
+                //if user exists, try and match the password
+                if(result != null){
+                    if(password.equals(result)){
+                        System.out.println("User matched!");
+                    }
+                    else{
+                        System.out.println("Wrong password!");
+                    }
+                }
+                else{//is user does not exist create it
+                    DBManage.addUser(username, password, "User");
+                    System.out.printf("User added with username %s\n", username);
+                }
             }
         };
 
