@@ -20,6 +20,7 @@ public class HelloApplication extends Application {
 
         this.stage = stage;
         loginWindow = new LoginWindow();
+        homeWindow = new HomeWindow();
 
         stage.setTitle("Lite Snacks");
         stage.setScene(loginWindow.getScene());
