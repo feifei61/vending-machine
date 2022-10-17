@@ -16,7 +16,7 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        System system = new System(); //use this for logic
+        Sys system = new Sys(); //use this for logic
 
         this.stage = stage;
         loginWindow = new LoginWindow(this);

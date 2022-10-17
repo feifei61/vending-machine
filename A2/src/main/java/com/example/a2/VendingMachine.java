@@ -8,7 +8,7 @@ import com.example.a2.products.Product;
 public class VendingMachine {
     private List<Product> productInventory;
     private List<Currency> currencyInventory;
-    private HashMap<Integer,Integer> cart; // Map<prodID,qty>
+    private HashMap<Integer,Integer> cart = new HashMap<>(); // Map<prodID,qty>
 
     public VendingMachine() {
         updateProductInventory();
@@ -16,6 +16,14 @@ public class VendingMachine {
 
     public void updateProductInventory() {
         this.productInventory = DBManage.getProducts();
+    }
+
+    public Product findProductByID(int prodID) {
+        for (Product product : this.productInventory) {
+            if (product.getCode() == prodID)
+                return product;
+        }
+        return null;
     }
 
     // ---------------------------

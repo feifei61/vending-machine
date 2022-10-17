@@ -1,10 +1,10 @@
 package com.example.a2;
 
-public class System{
+public class Sys{
 
     private VendingMachine vendingMachine;
 
-    public System() {
+    public Sys() {
         this.vendingMachine = new VendingMachine();
     }
 
