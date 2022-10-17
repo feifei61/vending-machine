@@ -3,6 +3,7 @@ package com.example.a2.view;
 import java.io.FileInputStream;
 
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -17,6 +18,7 @@ public class HomeWindow implements Window {
     private BackgroundImage bImg;
 
     private ScrollPane scrollPane;
+    private Button checkout;
 
     public HomeWindow() {
         pane = new Pane();
@@ -37,6 +39,12 @@ public class HomeWindow implements Window {
         scrollPane.setPrefSize(380, 480);
         scrollPane.relocate(20,60);
         pane.getChildren().add(scrollPane);
+
+        //checkout button
+        checkout = new Button("Checkout");
+        checkout.setTranslateX(415);
+        checkout.setTranslateY(400);
+        pane.getChildren().add(checkout);
     }
 
     @Override
