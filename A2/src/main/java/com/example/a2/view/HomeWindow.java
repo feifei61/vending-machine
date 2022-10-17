@@ -10,6 +10,9 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+import com.example.a2.Product;
+import com.example.a2.System;
+
 public class HomeWindow implements Window {
     private Pane pane;
     private Scene scene;
@@ -24,7 +27,11 @@ public class HomeWindow implements Window {
     private Text recentTxt;
     private Text allTxt;
 
-    public HomeWindow() {
+    private System sys;
+
+    public HomeWindow(System system) {
+        this.sys = system;
+
         pane = new Pane();
         scene = new Scene(pane, width, height);
 
@@ -39,9 +46,7 @@ public class HomeWindow implements Window {
         bg = new Background(bImg);
         pane.setBackground(bg);
 
-        scrollPane = new ScrollPane();
-        scrollPane.setPrefSize(380, 480);
-        scrollPane.relocate(20,60);
+        cfgProductPane(); // need to cfg everything in the scrollpane b4 adding to renderqueue
         pane.getChildren().add(scrollPane);
 
         //checkout button
@@ -54,6 +59,24 @@ public class HomeWindow implements Window {
         pane.getChildren().add(checkout);
     }
 
+    public void cfgProductPane() {
+        scrollPane = new ScrollPane();
+        scrollPane.setPrefSize(380, 480);
+        scrollPane.relocate(20,60);
+
+        allTxt = new Text("All Products");
+        allTxt.setFont(new Font(30));
+        VBox box = new VBox();
+        box.getChildren().add(allTxt);
+        
+        for (Product product : sys.getVendingMachine().getProductInventroy()) {
+            box.getChildren().add(new Text(String.format("%d %s %.2f",  
+                        product.getCode(), product.getName(), product.getCost())));
+        }
+        
+        scrollPane.setContent(box);
+    }
+
     @Override
     public Scene getScene() {
         return scene;
@@ -64,11 +87,7 @@ public class HomeWindow implements Window {
         //TODO show recent
 
         //TODO show all products
-        allTxt = new Text("All Products");
-        allTxt.setFont(new Font(30));
-        VBox box = new VBox();
-        box.getChildren().add(allTxt);
-        scrollPane.setContent(box);
+        
     }
 
     @Override

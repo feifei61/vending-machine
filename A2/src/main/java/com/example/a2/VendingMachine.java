@@ -36,4 +36,8 @@ public class VendingMachine {
     public List<Currency> getCurrencyInventory() {
         return this.currencyInventory;
     }
+
+    public HashMap<Integer,Integer> getCart() {
+        return this.cart;
+    }
 }

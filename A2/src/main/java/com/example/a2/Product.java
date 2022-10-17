@@ -13,11 +13,20 @@ public abstract class Product {
         this.qty = qty;
     }
 
-    public double getCost() {
-        return cost;
+    public int getCode() {
+        return this.code;
     }
 
     public String getName() {
         return name;
     }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public int getQty() {
+        return this.qty;
+    }
+    
 }
