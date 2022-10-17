@@ -36,7 +36,13 @@ public class LoginWindow implements Window{
         EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e)
             {
-                DBManage.addUser(captureUsername.getText(), capturePassword.getText(), )
+                String username = captureUsername.getText();
+                String password = capturePassword.getText();
+
+                //if user exists, try and match the password
+
+                //is user does not exist create it
+                DBManage.addUser(username, password, "User");
             }
         };
 

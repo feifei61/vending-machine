@@ -32,8 +32,7 @@ public class HelloApplication extends Application {
     public static void main(String[] args) {
         System system = new System(); //use this for logic
         DBManage.createDB();
-        DBManage.addUser("anh", "asdasd", "owner");
-        DBManage.addUser("anh", "asdasd", "owner");
+        DBManage.addUser("admin", "admin", "Owner");
         DBManage.addProduct(10.4, "apple", "fruit");
         DBManage.addTransaction(1,1, true);
         launch();
