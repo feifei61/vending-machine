@@ -7,7 +7,7 @@ import java.lang.System;
 public class DBManage {
 
     static Connection connection = null;
-    static String url = "jdbc:sqlite:src/main/data/database.sqlite";
+    static String url = "jdbc:sqlite:src\\main\\data\\database.sqlite";
 
     // create the database
     public static void createDB() {

@@ -1,5 +1,6 @@
 package com.example.a2.view;
 
+import com.example.a2.DBManage;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.*;
@@ -35,9 +36,7 @@ public class LoginWindow implements Window{
         EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e)
             {
-                // TODO username and password need to be given to the System
-                System.out.println(captureUsername.getText());
-                System.out.println(capturePassword.getText());
+                DBManage.addUser(captureUsername.getText(), capturePassword.getText(), )
             }
         };
 
