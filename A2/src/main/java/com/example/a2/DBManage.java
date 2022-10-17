@@ -2,6 +2,10 @@ package com.example.a2;
 
 import java.sql.*;
 import java.util.ArrayList;
+
+import com.example.a2.products.Drinks;
+import com.example.a2.products.Product;
+
 import java.lang.System;
 
 public class DBManage {

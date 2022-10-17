@@ -3,6 +3,8 @@ package com.example.a2;
 import java.util.HashMap;
 import java.util.List;
 
+import com.example.a2.products.Product;
+
 public class VendingMachine {
     private List<Product> productInventory;
     private List<Currency> currencyInventory;

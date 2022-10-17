@@ -5,13 +5,14 @@ import java.io.FileInputStream;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-import com.example.a2.Product;
 import com.example.a2.System;
+import com.example.a2.products.Product;
 
 public class HomeWindow implements Window {
     private Pane pane;
@@ -23,6 +24,10 @@ public class HomeWindow implements Window {
     private BackgroundImage bImg;
 
     private ScrollPane scrollPane;
+    private Text prodID;
+    private TextField itemCode;
+    private Text prodQty;
+    private TextField itemQty;
     private Button checkout;
     private Text recentTxt;
     private Text allTxt;
@@ -48,6 +53,27 @@ public class HomeWindow implements Window {
 
         cfgProductPane(); // need to cfg everything in the scrollpane b4 adding to renderqueue
         pane.getChildren().add(scrollPane);
+
+        // item code
+        prodID = new Text("Enter Product ID:");
+        itemCode = new TextField();
+
+        pane.getChildren().add(prodID);
+        pane.getChildren().add(itemCode);
+        prodID.setTranslateX(20);
+        prodID.setTranslateY(555);
+        itemCode.setTranslateX(20);
+        itemCode.setTranslateY(560);
+
+        prodQty = new Text("Quantity:");
+        itemQty = new TextField();
+
+        pane.getChildren().add(prodQty);
+        pane.getChildren().add(itemQty);
+        prodQty.setTranslateX(200);
+        prodQty.setTranslateY(555);
+        itemQty.setTranslateX(200);
+        itemQty.setTranslateY(560);
 
         //checkout button
         checkout = new Button("Checkout");

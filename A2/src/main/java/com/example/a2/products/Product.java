@@ -1,4 +1,4 @@
-package com.example.a2;
+package com.example.a2.products;
 
 public abstract class Product {
     protected int code;
