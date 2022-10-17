@@ -39,10 +39,21 @@ public class LoginWindow implements Window{
                 String username = captureUsername.getText();
                 String password = capturePassword.getText();
 
-                //if user exists, try and match the password
+                String result = DBManage.getUser(username);
 
-                //is user does not exist create it
-                DBManage.addUser(username, password, "User");
+                //if user exists, try and match the password
+                if(result != null){
+                    if(password.equals(result)){
+                        System.out.println("User matched!");
+                    }
+                    else{
+                        System.out.println("Wrong password!");
+                    }
+                }
+                else{//is user does not exist create it
+                    DBManage.addUser(username, password, "User");
+                    System.out.printf("User added with username %s\n", username);
+                }
             }
         };
 

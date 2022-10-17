@@ -50,6 +50,44 @@ public class DBManage {
         }
     }
 
+    public static String getUser(String userName){
+        String resultPassword = null;
+
+        try {
+            connection = DriverManager.getConnection(url);
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+
+            String insertStatement = "SELECT * FROM Users WHERE (? = Users.Username)";
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement(insertStatement);
+            preparedStatement.setString(1, userName);
+            ResultSet result = preparedStatement.executeQuery();
+
+            if(result.isClosed()){
+                System.out.println("User not found");
+                return null;
+            }
+
+            resultPassword = result.getString("password");
+
+        } catch (Exception e) {
+            java.lang.System.out.println("_________________________ERROR at addUser_________________________");
+            java.lang.System.err.println(e.getMessage());
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // connection close failed.
+                java.lang.System.err.println(e.getMessage());
+            }
+        }
+
+        return resultPassword;
+    }
+
     // add user to database
     public static void addUser(String userName, String password, String role){
         try {
