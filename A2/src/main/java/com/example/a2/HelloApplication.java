@@ -39,7 +39,7 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-        // DBManage.createDB();
+        DBManage.createDB();
         // DBManage.addUser("admin", "admin", "Owner");
         // DBManage.addProduct(10.4, "cola", "Drinks");
         // DBManage.addTransaction(1,1, true);

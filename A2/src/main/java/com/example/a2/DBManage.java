@@ -28,6 +28,10 @@ public class DBManage {
                     "prodID INTEGER PRIMARY KEY NOT NULL, " +
                     "quantity INTEGER DEFAULT (7), " +
                     "Category TEXT)");
+            // currency Table
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS Currencies " +
+                    "(amount FLOAT, " +
+                    "quantity INTEGER DEFAULT (5))");
             // transactions Table
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS Transactions " +
                     "(transID INTEGER PRIMARY KEY NOT NULL, " +
@@ -261,11 +265,14 @@ public class DBManage {
                 int prodID = productList.getInt("prodID");
                 String prodName = productList.getString("name");
                 double cost = productList.getFloat("cost");
+                int qty = productList.getInt("quantity");
+
+                // TODO: finish all category cases here
                 switch (productList.getString("Category")) {
                     case "Drinks":
-                        products.add(new Drinks(prodID, prodName, cost));
+                        products.add(new Drinks(prodID, prodName, cost, qty));
                     default:
-                        System.out.println("product categry invalid");
+                        System.out.println("product category invalid");
                 }
             }
         } catch (Exception e) {
