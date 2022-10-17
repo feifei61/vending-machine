@@ -39,12 +39,13 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-        System system = new System(); //use this for logic
         // DBManage.createDB();
         // DBManage.addUser("admin", "admin", "Owner");
-        // DBManage.addProduct(10.4, "apple", "fruit");
+        // DBManage.addProduct(10.4, "cola", "Drinks");
         // DBManage.addTransaction(1,1, true);
-        launch();
 
+        System system = new System(); //use this for logic
+        java.lang.System.out.println(system.getVendingMachine().getProductInventroy());
+        launch();
     }
 }

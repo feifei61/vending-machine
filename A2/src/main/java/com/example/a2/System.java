@@ -2,8 +2,10 @@ package com.example.a2;
 
 public class System{
 
+    private VendingMachine vendingMachineSession;
+
     public System() {
-        
+        this.vendingMachineSession = new VendingMachine();
     }
 
     /*
@@ -11,6 +13,11 @@ public class System{
      */
     public boolean addUser(User user){
         return false;
+    }
+
+    // TODO: test only
+    public VendingMachine getVendingMachine() {
+        return this.vendingMachineSession;
     }
 
 }

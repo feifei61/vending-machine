@@ -5,6 +5,12 @@ public abstract class Product {
     protected String name;
     protected double cost;
 
+    public Product(int code, String name, double cost) {
+        this.code = code;
+        this.name = name;
+        this.cost = cost;
+    }
+
     public double getCost() {
         return cost;
     }

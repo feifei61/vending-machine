@@ -243,21 +243,29 @@ public class DBManage {
         }
     }
 
-    // get name of all products currently in db
-    public static ArrayList<String> getProducts(){
-        ArrayList<String> products = new ArrayList<>();
+    // get all products currently in db
+    public static ArrayList<Product> getProducts(){
+        ArrayList<Product> products = new ArrayList<>();
 
         try {
             connection = DriverManager.getConnection(url);
 
             // make sure the order is same using "order by"
-            String insertStatement = "SELECT name FROM products";
+            String insertStatement = "SELECT * FROM products";
             PreparedStatement preparedStatement =
                     connection.prepareStatement(insertStatement);
             ResultSet productList = preparedStatement.executeQuery();
 
             while (productList.next()) {
-                products.add(productList.getString("name"));
+                int prodID = productList.getInt("prodID");
+                String prodName = productList.getString("name");
+                double cost = productList.getFloat("cost");
+                switch (productList.getString("Category")) {
+                    case "Drinks":
+                        products.add(new Drinks(prodID, prodName, cost));
+                    default:
+                        System.out.println("product categry invalid");
+                }
             }
         } catch (Exception e) {
             java.lang.System.out.println("_________________________ERROR at getProducts_________________________");
