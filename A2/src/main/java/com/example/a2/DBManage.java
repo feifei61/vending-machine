@@ -26,6 +26,7 @@ public class DBManage {
                     "(cost FLOAT, " +
                     "name TEXT, " +
                     "prodID INTEGER PRIMARY KEY NOT NULL, " +
+                    "quantity INTEGER DEFAULT (7), " +
                     "Category TEXT)");
             // transactions Table
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS Transactions " +
