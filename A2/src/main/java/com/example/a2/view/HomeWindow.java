@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 public class HomeWindow implements Window {
     private Pane pane;
@@ -19,6 +21,8 @@ public class HomeWindow implements Window {
 
     private ScrollPane scrollPane;
     private Button checkout;
+    private Text recentTxt;
+    private Text allTxt;
 
     public HomeWindow() {
         pane = new Pane();
@@ -44,24 +48,32 @@ public class HomeWindow implements Window {
         checkout = new Button("Checkout");
         checkout.setTranslateX(415);
         checkout.setTranslateY(400);
+        checkout.setStyle(
+            "-fx-background-color: #e6cc00;"
+        );
         pane.getChildren().add(checkout);
     }
 
     @Override
     public Scene getScene() {
-        // TODO Auto-generated method stub
         return scene;
     }
 
     @Override
     public void draw() {
-        // TODO Auto-generated method stub
-        
+        //TODO show recent
+
+        //TODO show all products
+        allTxt = new Text("All Products");
+        allTxt.setFont(new Font(30));
+        VBox box = new VBox();
+        box.getChildren().add(allTxt);
+        scrollPane.setContent(box);
     }
 
     @Override
     public void run() {
-        // TODO Auto-generated method stub
+        // TODO get user if logged in
         
     }
     
