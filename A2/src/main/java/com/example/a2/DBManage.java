@@ -7,6 +7,7 @@ import com.example.a2.products.Drinks;
 import com.example.a2.products.Product;
 
 import java.lang.System;
+import java.util.Date;
 
 public class DBManage {
 
@@ -39,9 +40,10 @@ public class DBManage {
             // transactions Table
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS Transactions " +
                     "(transID INTEGER PRIMARY KEY NOT NULL, " +
-                    "userID REFERENCES Users(userID) NOT NULL, " +
+                    "userID REFERENCES Users(userID), " +
                     "prodID REFERENCES Products(prodID) NOT NULL," +
                     "success BIT NOT NULL," +
+                    "quantity INTEGER DEFAULT (7)," +
                     "date TIMESTAMP)");
             java.lang.System.out.println("------------DB created------------");
         } catch (Exception e) {
@@ -212,8 +214,8 @@ public class DBManage {
         }
     }
 
-    // add purchase history (the time of transaction will be recorded when this function is called)
-    public static void addTransaction(int userID, int prodID, boolean success){
+    // add purchase history (customer has account)(the time of transaction will be recorded when this function is called)
+    public static void addTransaction(int prodID, boolean success, int userID){
         try {
             connection = DriverManager.getConnection(url);
             Statement statement = connection.createStatement();
@@ -251,6 +253,87 @@ public class DBManage {
             }
         }
     }
+
+    // add purchase history (anonymous buyer)
+    public static void addTransaction(int prodID, boolean success){
+        try {
+            connection = DriverManager.getConnection(url);
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+
+            int successBit;
+            if (success){
+                successBit = 1;
+            } else {
+                successBit = 0;
+            }
+
+            Timestamp timestamp = new Timestamp(java.lang.System.currentTimeMillis());
+
+            String insertStatement = "INSERT INTO Transactions (prodID, success, date) VALUES(?,?,?)";
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement(insertStatement);
+            preparedStatement.setInt(1, prodID);
+            preparedStatement.setInt(2, successBit);
+            preparedStatement.setTimestamp(3, timestamp);
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e) {
+            java.lang.System.out.println("_________________________ERROR at addTransaction_________________________");
+            java.lang.System.err.println(e.getMessage());
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // connection close failed.
+                java.lang.System.err.println(e.getMessage());
+            }
+        }
+    }
+
+    // get the last 5 transaction of a user
+    public static ArrayList<Transaction> getLastFiveTransactionsByUserID(int userID){
+        ArrayList<Transaction> transactions = new ArrayList<>();
+
+        try {
+            connection = DriverManager.getConnection(url);
+
+            // make sure the order is same using "order by"
+            String insertStatement = "SELECT * FROM Transactions WHERE userID = ? ORDER BY date DESC";
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement(insertStatement);
+            preparedStatement.setInt(1, userID);
+            ResultSet productList = preparedStatement.executeQuery();
+
+            int i = 0;
+            while (productList.next() && i < 5) {
+                int prodID = productList.getInt("prodID");
+                int transID = productList.getInt("transID");
+                boolean success = productList.getInt("success") == 1;
+                Date date = new Date(productList.getTimestamp("date").getTime());
+                int quantity = productList.getInt("quantity");
+
+                transactions.add(new Transaction(transID, prodID, quantity, success, date, userID));
+                i++;
+            }
+        } catch (Exception e) {
+            java.lang.System.out.println("_________________________ERROR at getLastFiveTransactionsByUserID_________________________");
+            java.lang.System.err.println(e.getMessage());
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // connection close failed.
+                java.lang.System.err.println(e.getMessage());
+            }
+        }
+        return transactions;
+    }
+
 
     // get all products currently in db
     public static ArrayList<Product> getProducts(){
@@ -294,4 +377,6 @@ public class DBManage {
         }
         return products;
     }
+
+    // get 5 most recent products
 }
