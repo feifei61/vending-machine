@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class HelloApplication extends Application {
     private LoginWindow loginWindow;
@@ -41,10 +42,16 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-        // DBManage.createDB();
-        // DBManage.addUser("admin", "admin", "Owner");
-        // DBManage.addProduct(10.4, "cola", "Drinks");
-        // DBManage.addTransaction(1,1, true);
+         DBManage.createDB();
+//         DBManage.addUser("admin", "admin", "Owner");
+//         DBManage.addProduct(10.4, "cola", "Drinks");
+//         DBManage.addTransaction(1,true,2);
+//
+//         ArrayList<Transaction> transactions = DBManage.getLastFiveTransactionsByUserID(2);
+//         for (Transaction transaction: transactions){
+//             System.out.println("Date: " + transaction.getDate());
+//             System.out.println("TransID: " + transaction.getTransID());
+//         }
 
         // java.lang.System.out.println(system.getVendingMachine().getProductInventroy());
 
