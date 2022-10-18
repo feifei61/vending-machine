@@ -2,6 +2,8 @@ package com.example.a2.view;
 
 import java.io.FileInputStream;
 
+import com.example.a2.System;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -24,7 +26,11 @@ public class HomeWindow implements Window {
     private Text recentTxt;
     private Text allTxt;
 
-    public HomeWindow() {
+    private System system;
+
+    public HomeWindow(System system) {
+        this.system = system;
+
         pane = new Pane();
         scene = new Scene(pane, width, height);
 

@@ -19,8 +19,8 @@ public class HelloApplication extends Application {
         System system = new System(); //use this for logic
 
         this.stage = stage;
+        homeWindow = new HomeWindow(system);
         loginWindow = new LoginWindow();
-        homeWindow = new HomeWindow();
 
         stage.setTitle("Lite Snacks");
         stage.setScene(loginWindow.getScene());
