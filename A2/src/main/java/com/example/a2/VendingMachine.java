@@ -1,5 +1,6 @@
 package com.example.a2;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,6 +10,7 @@ public class VendingMachine {
     private List<Product> productInventory;
     private List<Currency> currencyInventory;
     private HashMap<Integer,Integer> cart = new HashMap<>(); // Map<prodID,qty>
+    private final String[] categories = {"Drinks", "Chocolates", "Chips", "Candies"}; // pre-defined; can't be modified
 
     public VendingMachine() {
         updateProductInventory();
@@ -26,6 +28,16 @@ public class VendingMachine {
         return null;
     }
 
+    public List<Product> ShowProductCategorized(String category) {
+        List<Product> resultSet = new ArrayList<Product>();
+        for (Product product : this.productInventory) {
+            if (product.getCategoryStr().equals(category)) {
+                resultSet.add(product);
+            }
+        }
+        return resultSet;
+    }
+
     // ---------------------------
     // -------- Cart -------------
     // ---------------------------
@@ -38,6 +50,10 @@ public class VendingMachine {
     // ---------------------------
     // ----- SETTER/GETTER -------
     // ---------------------------
+
+    public String[] getCategories() {
+        return this.categories;
+    }
 
     public List<Product> getProductInventroy() {
         return this.productInventory;
