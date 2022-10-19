@@ -11,13 +11,15 @@ public class VendingMachine {
     private List<Currency> currencyInventory;
     private HashMap<Integer,Integer> cart = new HashMap<>(); // Map<prodID,qty>
     private final String[] categories = {"Drinks", "Chocolates", "Chips", "Candies"}; // pre-defined; can't be modified
+    private DBManage database;
 
-    public VendingMachine() {
+    public VendingMachine(DBManage database) {
+        this.database = database;
         updateProductInventory();
     }
 
     public void updateProductInventory() {
-        this.productInventory = DBManage.getProducts();
+        this.productInventory = database.getProducts();
     }
 
     public Product findProductByID(int prodID) {

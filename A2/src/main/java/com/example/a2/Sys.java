@@ -3,9 +3,12 @@ package com.example.a2;
 public class Sys{
 
     private VendingMachine vendingMachine;
+    private DBManage database;
 
     public Sys() {
-        this.vendingMachine = new VendingMachine();
+        this.database = new DBManage("database.sqlite");
+        database.createDB();
+        this.vendingMachine = new VendingMachine(database);
     }
 
     /*
@@ -17,6 +20,10 @@ public class Sys{
 
     public VendingMachine getVendingMachine() {
         return this.vendingMachine;
+    }
+
+    public DBManage getDatabase(){
+        return database;
     }
 
 }

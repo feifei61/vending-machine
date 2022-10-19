@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc834443-829b-41d8-912e-f768bb95e7ef" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/45596ad9-b8f6-4bc5-b780-b07c21d215fd.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7afd22d7-dd75-4fbe-a1b2-a20241a032a7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/95657b88-d160-4a94-a075-469f8c91b21e.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b8e7cd64-845d-4856-82c7-ff657515960e.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/bc1d0d2c-ae50-4c26-8f48-0c3b312b413d.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/a2/DBManage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/a2/DBManage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/a2/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/a2/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/a2/Sys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/a2/Sys.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/a2/VendingMachine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/a2/VendingMachine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/a2/view/LoginWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/a2/view/LoginWindow.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +106,7 @@
       <workItem from="1665553724905" duration="1985000" />
       <workItem from="1665753831905" duration="4933000" />
       <workItem from="1666057020082" duration="3920000" />
-      <workItem from="1666152031791" duration="28000" />
+      <workItem from="1666152031791" duration="1051000" />
     </task>
     <task id="LOCAL-00001" summary="fixes">
       <created>1665966559593</created>
