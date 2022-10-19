@@ -103,21 +103,32 @@ public class HomeWindow implements Window {
     public void cfgCategoryDropbox() {
         // comboBox => select at most 1 from pre-defined options
         comboBox = new ComboBox();
+        comboBox.setTranslateX(20);
+        comboBox.setTranslateY(20);
 
+        comboBox.getItems().add("All");
         for (String category: sys.getVendingMachine().getCategories()) {
             comboBox.getItems().add(category);
         }
 
+        comboBox.getSelectionModel().selectFirst(); // placeholder = 1st option = default All
+
         comboBox.setOnAction((event) -> {
             String selectedCategory = (String) comboBox.getValue();
-            System.out.println(selectedCategory);
 
             // reset scrollpane content
             VBox box = new VBox();
             
-            for (Product product : sys.getVendingMachine().ShowProductCategorized(selectedCategory)) {
-                box.getChildren().add(new Text(String.format("%d %s %.2f",
-                        product.getCode(), product.getName(), product.getCost())));
+            if (selectedCategory.equals("All")) {
+                for (Product product : sys.getVendingMachine().getProductInventroy()) {
+                    box.getChildren().add(new Text(String.format("%d %s %.2f",
+                            product.getCode(), product.getName(), product.getCost())));
+                }
+            } else {
+                for (Product product : sys.getVendingMachine().ShowProductCategorized(selectedCategory)) {
+                    box.getChildren().add(new Text(String.format("%d %s %.2f",
+                            product.getCode(), product.getName(), product.getCost())));
+                }
             }
 
             scrollPane.setContent(box);
