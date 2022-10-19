@@ -11,11 +11,17 @@ import java.util.Date;
 
 public class DBManage {
 
-    static Connection connection = null;
-    static String url = "jdbc:sqlite:src\\main\\data\\database.sqlite";
+    public Connection connection = null;
+    public String url = "jdbc:sqlite:src\\main\\data\\";
+    public String fileName;
+
+    public DBManage(String fileName){
+        this.fileName = fileName;
+    }
 
     // create the database
-    public static void createDB() {
+    public void createDB() {
+        url = url + fileName;
         try {
             connection = DriverManager.getConnection(url);
             Statement statement = connection.createStatement();
@@ -61,7 +67,7 @@ public class DBManage {
         }
     }
 
-    public static String getUser(String userName){
+    public String getUser(String userName){
         String resultPassword = null;
 
         try {
@@ -99,7 +105,7 @@ public class DBManage {
     }
 
     // add user to database
-    public static void addUser(String userName, String password, String role){
+    public void addUser(String userName, String password, String role){
         try {
             connection = DriverManager.getConnection(url);
             Statement statement = connection.createStatement();
@@ -129,7 +135,7 @@ public class DBManage {
     }
 
     // remove user from database using their ID
-    public static void removeUser(int userID){
+    public void removeUser(int userID){
         try {
             connection = DriverManager.getConnection(url);
             Statement statement = connection.createStatement();
@@ -157,7 +163,7 @@ public class DBManage {
     }
 
     // add product to database
-    public static void addProduct(double cost, String name, String category){
+    public void addProduct(double cost, String name, String category){
         try {
             connection = DriverManager.getConnection(url);
             Statement statement = connection.createStatement();
@@ -187,7 +193,7 @@ public class DBManage {
     }
 
     // remove product from database using their ID
-    public static void removeProduct(int prodID){
+    public void removeProduct(int prodID){
         try {
             connection = DriverManager.getConnection(url);
             Statement statement = connection.createStatement();
@@ -215,7 +221,7 @@ public class DBManage {
     }
 
     // add purchase history (customer has account)(the time of transaction will be recorded when this function is called)
-    public static void addTransaction(int prodID, boolean success, int userID){
+    public void addTransaction(int prodID, boolean success, int userID){
         try {
             connection = DriverManager.getConnection(url);
             Statement statement = connection.createStatement();
@@ -255,7 +261,7 @@ public class DBManage {
     }
 
     // add purchase history (anonymous buyer)
-    public static void addTransaction(int prodID, boolean success){
+    public void addTransaction(int prodID, boolean success){
         try {
             connection = DriverManager.getConnection(url);
             Statement statement = connection.createStatement();
@@ -294,7 +300,7 @@ public class DBManage {
     }
 
     // get the last 5 transaction of a user
-    public static ArrayList<Transaction> getLastFiveTransactionsByUserID(int userID){
+    public ArrayList<Transaction> getLastFiveTransactionsByUserID(int userID){
         ArrayList<Transaction> transactions = new ArrayList<>();
 
         try {
@@ -336,7 +342,7 @@ public class DBManage {
 
 
     // get all products currently in db
-    public static ArrayList<Product> getProducts(){
+    public ArrayList<Product> getProducts(){
         ArrayList<Product> products = new ArrayList<>();
 
         try {

@@ -5,13 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc834443-829b-41d8-912e-f768bb95e7ef" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/data/placeholder.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/a2/Transaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/a2/DBManage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/a2/DBManage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/a2/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/a2/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/a2/Sys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/a2/Sys.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/a2/VendingMachine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/a2/VendingMachine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/a2/view/LoginWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/a2/view/LoginWindow.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,6 +106,7 @@
       <workItem from="1665553724905" duration="1985000" />
       <workItem from="1665753831905" duration="4933000" />
       <workItem from="1666057020082" duration="3920000" />
+      <workItem from="1666152031791" duration="1051000" />
     </task>
     <task id="LOCAL-00001" summary="fixes">
       <created>1665966559593</created>
