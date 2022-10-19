@@ -1,5 +1,6 @@
 package com.example.a2.view;
 
+import com.example.a2.DBManage;
 import com.example.a2.Sys;
 import com.example.a2.products.Product;
 
@@ -7,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -38,6 +40,7 @@ public class HomeWindow implements Window {
     private Button checkout;
     private Text recentTxt;
     private Text allTxt;
+    private ComboBox comboBox;
 
     private Sys sys;
 
@@ -60,6 +63,9 @@ public class HomeWindow implements Window {
         cfgProductPane(); // need to cfg everything in the scrollpane b4 adding to renderqueue
         pane.getChildren().add(scrollPane);
 
+        cfgCategoryDropbox();
+        pane.getChildren().add(comboBox);
+
         cfgPurchaseBox();
         pane.getChildren().add(prodID);
         pane.getChildren().add(itemCode);
@@ -81,7 +87,7 @@ public class HomeWindow implements Window {
         scrollPane.setPrefSize(380, 480);
         scrollPane.relocate(20, 60);
 
-        allTxt = new Text("All Products");
+        allTxt = new Text("Products");
         allTxt.setFont(new Font(30));
         VBox box = new VBox();
         box.getChildren().add(allTxt);
@@ -92,6 +98,32 @@ public class HomeWindow implements Window {
         }
 
         scrollPane.setContent(box);
+    }
+
+    public void cfgCategoryDropbox() {
+        // comboBox => select at most 1 from pre-defined options
+        comboBox = new ComboBox();
+
+        for (String category: sys.getVendingMachine().getCategories()) {
+            comboBox.getItems().add(category);
+        }
+
+        comboBox.setOnAction((event) -> {
+            String selectedCategory = (String) comboBox.getValue();
+            System.out.println(selectedCategory);
+
+            // reset scrollpane content
+            VBox box = new VBox();
+            
+            for (Product product : sys.getVendingMachine().ShowProductCategorized(selectedCategory)) {
+                box.getChildren().add(new Text(String.format("%d %s %.2f",
+                        product.getCode(), product.getName(), product.getCost())));
+            }
+
+            scrollPane.setContent(box);
+
+        });
+        
     }
 
     public void cfgPurchaseBox() {

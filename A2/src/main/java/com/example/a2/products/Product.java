@@ -13,6 +13,8 @@ public abstract class Product {
         this.qty = qty;
     }
 
+    public abstract String getCategoryStr();
+
     public int getCode() {
         return this.code;
     }
