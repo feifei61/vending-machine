@@ -22,7 +22,7 @@ public class ControlHandler {
                 @Override
                 public void handle(ActionEvent event) {
                     //trigger idle
-                    vendingMachine.triggerTimer();
+//                    vendingMachine.triggerTimer();
 
                     //add product to cart
                 }
