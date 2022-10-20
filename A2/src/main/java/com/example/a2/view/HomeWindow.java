@@ -24,6 +24,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 public class HomeWindow implements Window {
     private Pane pane;
@@ -96,6 +97,7 @@ public class HomeWindow implements Window {
         box.getChildren().add(allTxt);
 
         HBox currHBox = new HBox();
+        currHBox.setSpacing(10);
         int hcount = 0;
 
         for (Product product : sys.getVendingMachine().getProductInventroy()) {
@@ -103,14 +105,17 @@ public class HomeWindow implements Window {
                 VBox productBox = new VBox();
                 
                 ImageView view = new ImageView(new Image(getClass().getResource("/drink.png").toString()));
-                view.setFitHeight(60);
+                view.setFitHeight(50);
                 view.setFitWidth(50);
                 Button button = new Button();
                 button.setGraphic(view);
+                button.setStyle("-fx-border-color: transparent;-fx-background-color: transparent;");
 
                 productBox.getChildren().add(button);
-                productBox.getChildren().add(new Text(String.format("%s \n%.2f",
-                product.getName(), product.getCost())));
+                Text productText = new Text(String.format("%s \n%.2f",
+                product.getName(), product.getCost()));
+                // productText.setTextAlignment(TextAlignment.CENTER);
+                productBox.getChildren().add(productText);
 
                 currHBox.getChildren().add(productBox);
             }
@@ -119,6 +124,7 @@ public class HomeWindow implements Window {
             if (hcount == 5) {
                 box.getChildren().add(currHBox);
                 currHBox = new HBox();
+                currHBox.setSpacing(10);
                 hcount = 0;
             }
         }
