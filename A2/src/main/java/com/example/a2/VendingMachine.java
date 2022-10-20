@@ -1,18 +1,47 @@
 package com.example.a2;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import com.example.a2.products.Product;
 
 public class VendingMachine {
     private List<Product> productInventory;
     private List<Currency> currencyInventory;
-    private HashMap<Integer,Integer> cart = new HashMap<>(); // Map<prodID,qty>
-    private final String[] categories = {"Drinks", "Chocolates", "Chips", "Candies"}; // pre-defined; can't be modified
     private DBManage database;
+    private HashMap<Integer,Integer> cart = new HashMap<>(); // Map<prodID,qty>
+    public final static String[] categories = {"Drinks", "Chocolates", "Chips", "Candies"}; // pre-defined; can't be modified
+    public final static String[] denominations = {"5c", "10c", "20c", "50c", "1d", "2d", "5d", "10d", "20d", "50d", "100d"};
+    public final static String[] products = {"water", "sprite", "coke", "pepsi", "juice",
+                                        "mars", "m&m", "bounty", "snicker",
+                                        "smiths", "pringles", "kettles", "thins",
+                                        "mentos", "sourpatch", "skittles"};
+    public static Map<String, ArrayList<String>> productMap = null;
 
+    static {
+        Map<String, ArrayList<String>> aMap = new HashMap<>();
+        for(int i = 0; i < 4; i++){
+            aMap.put(categories[i], new ArrayList<String>());
+        }
+        for(int i = 0; i < 5; i++){
+            ArrayList<String> current = aMap.get(categories[0]);
+            current.add(products[i]);
+        }
+        for(int i = 5; i < 9; i++){
+            ArrayList<String> current = aMap.get(categories[1]);
+            current.add(products[i]);
+        }
+        for(int i = 9; i < 13; i++){
+            ArrayList<String> current = aMap.get(categories[2]);
+            current.add(products[i]);
+        }
+        for(int i = 13; i < 16; i++){
+            ArrayList<String> current = aMap.get(categories[3]);
+            current.add(products[i]);
+        }
+        productMap = Collections.unmodifiableMap(aMap);
+    }
+
+    // ------------------------------------------
     public VendingMachine(DBManage database) {
         this.database = database;
         updateProductInventory();

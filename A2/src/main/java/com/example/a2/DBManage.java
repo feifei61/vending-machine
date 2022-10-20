@@ -3,6 +3,9 @@ package com.example.a2;
 import java.sql.*;
 import java.util.ArrayList;
 
+import com.example.a2.products.Candies;
+import com.example.a2.products.Chips;
+import com.example.a2.products.Chocolates;
 import com.example.a2.products.Drinks;
 import com.example.a2.products.Product;
 
@@ -35,13 +38,13 @@ public class DBManage {
             // products Table
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS Products " +
                     "(cost FLOAT, " +
-                    "name TEXT, " +
+                    "name TEXT UNIQUE, " +
                     "prodID INTEGER PRIMARY KEY NOT NULL, " +
                     "quantity INTEGER DEFAULT (7), " +
                     "Category TEXT)");
             // currency Table
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS Currencies " +
-                    "(amount FLOAT, " +
+                    "(amount FLOAT PRIMARY KEY, " +
                     "quantity INTEGER DEFAULT (5))");
             // transactions Table
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS Transactions " +
@@ -52,6 +55,21 @@ public class DBManage {
                     "quantity INTEGER DEFAULT (7)," +
                     "date TIMESTAMP)");
             java.lang.System.out.println("------------DB created------------");
+
+            //populate currecies
+            for(String denomination : VendingMachine.denominations){
+                String toExecute = "INSERT INTO Currencies(amount, quantity) "+
+                        "VALUES(\"" + denomination + "\", 5);";
+                statement.executeUpdate(toExecute);
+            }
+            //populate products
+            for(String key : VendingMachine.productMap.keySet()){
+               ArrayList<String> products = VendingMachine.productMap.get(key);
+               for(String product : products){
+                   this.addProduct(0, product, key);
+               }
+            }
+
         } catch (Exception e) {
             java.lang.System.out.println("_________________________ERROR at createDB_________________________");
             java.lang.System.err.println(e.getMessage());
@@ -360,13 +378,25 @@ public class DBManage {
                 double cost = productList.getFloat("cost");
                 int qty = productList.getInt("quantity");
 
-                // TODO: finish all category cases here
+                // Don't remove this -> this populates product inventory that shows on UI
+                // all category cases to create different subclasses of Product
                 switch (productList.getString("Category")) {
                     case "Drinks":
                         products.add(new Drinks(prodID, prodName, cost, qty));
+                        break;
+                    case "Chocolates":
+                        products.add(new Chocolates(prodID, prodName, cost, qty));
+                        break;
+                    case "Chips":
+                        products.add(new Chips(prodID, prodName, cost, qty));
+                        break;
+                    case "Candies":
+                        products.add(new Candies(prodID, prodName, cost, qty));
+                        break;
                     default:
                         System.out.println("product category invalid");
                 }
+                
             }
         } catch (Exception e) {
             java.lang.System.out.println("_________________________ERROR at getProducts_________________________");
