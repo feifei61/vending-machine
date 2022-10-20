@@ -10,7 +10,9 @@ public class VendingMachine {
     private List<Product> productInventory;
     private List<Currency> currencyInventory;
     private HashMap<Integer,Integer> cart = new HashMap<>(); // Map<prodID,qty>
-    private final String[] categories = {"Drinks", "Chocolates", "Chips", "Candies"}; // pre-defined; can't be modified
+    public final static String[] categories = {"Drinks", "Chocolates", "Chips", "Candies"}; // pre-defined; can't be modified
+    public final static String[] denominations = {"5c", "10c", "20c", "50c", "1d", "2d", "5d", "10d", "20d", "50d", "100d"};
+
     private DBManage database;
 
     public VendingMachine(DBManage database) {

@@ -52,6 +52,9 @@ public class DBManage {
                     "quantity INTEGER DEFAULT (7)," +
                     "date TIMESTAMP)");
             java.lang.System.out.println("------------DB created------------");
+
+            //try and populate tables
+            
         } catch (Exception e) {
             java.lang.System.out.println("_________________________ERROR at createDB_________________________");
             java.lang.System.err.println(e.getMessage());
