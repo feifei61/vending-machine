@@ -7,15 +7,16 @@ import com.example.a2.products.Product;
 public class VendingMachine {
     private List<Product> productInventory;
     private List<Currency> currencyInventory;
+    private DBManage database;
     private HashMap<Integer,Integer> cart = new HashMap<>(); // Map<prodID,qty>
     public final static String[] categories = {"Drinks", "Chocolates", "Chips", "Candies"}; // pre-defined; can't be modified
     public final static String[] denominations = {"5c", "10c", "20c", "50c", "1d", "2d", "5d", "10d", "20d", "50d", "100d"};
     public final static String[] products = {"water", "sprite", "coke", "pepsi", "juice",
                                         "mars", "m&m", "bounty", "snicker",
                                         "smiths", "pringles", "kettles", "thins",
-                                        "mentos", "sourpatch", "skittles"
-    };
+                                        "mentos", "sourpatch", "skittles"};
     public static Map<String, ArrayList<String>> productMap = null;
+
     static {
         Map<String, ArrayList<String>> aMap = new HashMap<>();
         for(int i = 0; i < 4; i++){
@@ -39,8 +40,8 @@ public class VendingMachine {
         }
         productMap = Collections.unmodifiableMap(aMap);
     }
-    private DBManage database;
 
+    // ------------------------------------------
     public VendingMachine(DBManage database) {
         this.database = database;
         updateProductInventory();

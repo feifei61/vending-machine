@@ -3,6 +3,9 @@ package com.example.a2;
 import java.sql.*;
 import java.util.ArrayList;
 
+import com.example.a2.products.Candies;
+import com.example.a2.products.Chips;
+import com.example.a2.products.Chocolates;
 import com.example.a2.products.Drinks;
 import com.example.a2.products.Product;
 
@@ -374,7 +377,26 @@ public class DBManage {
                 String prodName = productList.getString("name");
                 double cost = productList.getFloat("cost");
                 int qty = productList.getInt("quantity");
-                String category = productList.getString("Category");
+
+                // Don't remove this -> this populates product inventory that shows on UI
+                // all category cases to create different subclasses of Product
+                switch (productList.getString("Category")) {
+                    case "Drinks":
+                        products.add(new Drinks(prodID, prodName, cost, qty));
+                        break;
+                    case "Chocolates":
+                        products.add(new Chocolates(prodID, prodName, cost, qty));
+                        break;
+                    case "Chips":
+                        products.add(new Chips(prodID, prodName, cost, qty));
+                        break;
+                    case "Candies":
+                        products.add(new Candies(prodID, prodName, cost, qty));
+                        break;
+                    default:
+                        System.out.println("product category invalid");
+                }
+                
             }
         } catch (Exception e) {
             java.lang.System.out.println("_________________________ERROR at getProducts_________________________");
