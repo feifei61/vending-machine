@@ -53,8 +53,20 @@ public class DBManage {
                     "date TIMESTAMP)");
             java.lang.System.out.println("------------DB created------------");
 
-            //try and populate tables
-            
+            //populate currecies
+            for(String denomination : VendingMachine.denominations){
+                String toExecute = "INSERT INTO Currencies(amount, quantity) "+
+                        "VALUES(\"" + denomination + "\", 5);";
+                statement.executeUpdate(toExecute);
+            }
+            //populate products
+            for(String key : VendingMachine.productMap.keySet()){
+               ArrayList<String> products = VendingMachine.productMap.get(key);
+               for(String product : products){
+                   this.addProduct(0, product, key);
+               }
+            }
+
         } catch (Exception e) {
             java.lang.System.out.println("_________________________ERROR at createDB_________________________");
             java.lang.System.err.println(e.getMessage());
@@ -362,14 +374,7 @@ public class DBManage {
                 String prodName = productList.getString("name");
                 double cost = productList.getFloat("cost");
                 int qty = productList.getInt("quantity");
-
-                // TODO: finish all category cases here
-                switch (productList.getString("Category")) {
-                    case "Drinks":
-                        products.add(new Drinks(prodID, prodName, cost, qty));
-                    default:
-                        System.out.println("product category invalid");
-                }
+                String category = productList.getString("Category");
             }
         } catch (Exception e) {
             java.lang.System.out.println("_________________________ERROR at getProducts_________________________");
