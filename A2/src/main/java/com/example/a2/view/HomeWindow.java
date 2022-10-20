@@ -2,6 +2,7 @@ package com.example.a2.view;
 
 import com.example.a2.DBManage;
 import com.example.a2.Sys;
+import com.example.a2.products.Drinks;
 import com.example.a2.products.Product;
 
 import javafx.event.ActionEvent;
@@ -12,11 +13,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -92,10 +95,34 @@ public class HomeWindow implements Window {
         VBox box = new VBox();
         box.getChildren().add(allTxt);
 
+        HBox currHBox = new HBox();
+        int hcount = 0;
+
         for (Product product : sys.getVendingMachine().getProductInventroy()) {
-            box.getChildren().add(new Text(String.format("%d %s %.2f",
-                    product.getCode(), product.getName(), product.getCost())));
+            if (product instanceof Drinks) {
+                VBox productBox = new VBox();
+                
+                ImageView view = new ImageView(new Image(getClass().getResource("/drink.png").toString()));
+                view.setFitHeight(60);
+                view.setFitWidth(50);
+                Button button = new Button();
+                button.setGraphic(view);
+
+                productBox.getChildren().add(button);
+                productBox.getChildren().add(new Text(String.format("%s \n%.2f",
+                product.getName(), product.getCost())));
+
+                currHBox.getChildren().add(productBox);
+            }
+            hcount++;
+
+            if (hcount == 5) {
+                box.getChildren().add(currHBox);
+                currHBox = new HBox();
+                hcount = 0;
+            }
         }
+        box.getChildren().add(currHBox);
 
         scrollPane.setContent(box);
     }
