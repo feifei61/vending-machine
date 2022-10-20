@@ -1,4 +1,5 @@
 package com.example.a2.view;
+import com.example.a2.Sys;
 import com.example.a2.User;
 
 import com.example.a2.DBManage;
@@ -22,8 +23,9 @@ public class LoginWindow implements Window {
     private int width = 400;
     private int height = 300;
     private HelloApplication app;
+    private Sys sys;
 
-    public LoginWindow(HelloApplication app) {
+    public LoginWindow(HelloApplication app, Sys sys) {
         pane = new Pane();
         scene = new Scene(pane, width, height);
         text = new Text();
@@ -63,7 +65,7 @@ public class LoginWindow implements Window {
                 String username = captureUsername.getText();
                 String password = capturePassword.getText();
 
-                String result = DBManage.getUser(username);
+                String result = sys.getDatabase().getUser(username);
 
                 //if user exists, try and match the password
                 if(result != null){
@@ -76,7 +78,7 @@ public class LoginWindow implements Window {
                     }
                 }
                 else{//is user does not exist create it
-                    DBManage.addUser(username, password, "User");
+                    sys.getDatabase().addUser(username, password, "User");
                     String displayText = "User added with username " + username;
                     text.setText(displayText);
                 }
