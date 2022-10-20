@@ -35,13 +35,13 @@ public class DBManage {
             // products Table
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS Products " +
                     "(cost FLOAT, " +
-                    "name TEXT, " +
+                    "name TEXT UNIQUE, " +
                     "prodID INTEGER PRIMARY KEY NOT NULL, " +
                     "quantity INTEGER DEFAULT (7), " +
                     "Category TEXT)");
             // currency Table
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS Currencies " +
-                    "(amount FLOAT, " +
+                    "(amount FLOAT PRIMARY KEY, " +
                     "quantity INTEGER DEFAULT (5))");
             // transactions Table
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS Transactions " +
