@@ -20,8 +20,10 @@ public class HelloApplication extends Application {
         Sys system = new Sys(); //use this for logic
 
         this.stage = stage;
-        loginWindow = new LoginWindow(this, system);
+        // loginWindow = new LoginWindow(this, system);
+        // homeWindow = new HomeWindow(system);
         homeWindow = new HomeWindow(system);
+        loginWindow = new LoginWindow();
 
         stage.setTitle("Lite Snacks");
         stage.setScene(loginWindow.getScene());
