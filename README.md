@@ -6,7 +6,7 @@ Users are allowed to select products and purchase them with either cash or card.
 Admin is allowed to make several changes to the vending machine including modify the details of products, produce activity reports, and assign roles to users.
 
 ### How to run application
-To run the application, navigate to the folder a2:
+To run the application, navigate to the folder a2 in the terminal:
 ```
 cd a2
 ```
